@@ -1,12 +1,34 @@
 jQuery(function($) {
 
-  // Size the intro logo splash to the viewport height on load.
-  $('.logo').height($(window).height());
-
-  // Resize the welcome panel on viewport resize.
-  $(window).on('resize orientationChanged', function() {
+  function set_section_heights() {
     $('.logo').height($(window).height());
+  }
+
+  $('a[href^=#]').on('click', function(e) {
+    var t= $(this.hash);
+    $('.logo').height(500);
+    t=t.length&&t||$('[name='+this.hash.slice(1)+']');
+    if(t.length){
+      var tOffset=t.offset().top;
+      $('html,body').animate({scrollTop:tOffset},'slow');
+      e.preventDefault();
+    }
   });
+
+  // Size the intro logo splash to the viewport height on load.
+  set_section_heights();
+
+  $(window).on('scroll', function() {
+    if ($(window).scrollTop() === 0) {
+      $('.logo').animate({height:$(window).height()}, 'fast');
+      $(window).on('resize orientationChanged', set_section_heights);
+    } else if ($('.logo').height() !== 500) {
+      $(window).off('resize orientationChanged', set_section_heights);
+      $('.logo').animate({height:500}, 'fast');
+    }
+  });
+  // Resize the welcome panel on viewport resize.
+  $(window).on('resize orientationChanged', set_section_heights);
 
   // Once the page has finished loading, animate the appearance of the logo and navigation.
   $(window).load(function () {

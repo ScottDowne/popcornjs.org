@@ -102,13 +102,13 @@ nav {
   background: white;
   border: 1px solid #bfbfbf;
   font-family: "AvantGardeGothicITCW01X";
-  margin-left: -300px;
+  margin-left: -350px;
   opacity: 0;
   text-align: center;
   position: fixed;
   left: 50%;
   top: 25px;
-  width: 600px;
+  width: 700px;
   z-index: 10;
   -webkit-transition: all 1s ease-in-out;
   -moz-transition: all 1s ease-in-out;
@@ -138,7 +138,7 @@ section {
   section .content {
     overflow: hidden;
     *zoom: 1;
-    margin: 0 auto;
+    margin: 70px auto;
     padding: 2em 0;
     width: 880px; }
   /* line 74, sass/_base.sass */
@@ -426,3 +426,17 @@ body.home .examples {
     /* line 162, sass/_home.sass */
     body.home .examples img:nth-child(3n+1) {
       margin-right: 0; }
+body.home .docs {
+  background: rgba(255, 255, 255, 0.75); }
+  body.home .docs ul{
+    list-style: square outside none;
+    margin: 0px 0px 18px 1.5em; }
+body.home .download {
+  background: rgba(230, 230, 255, 0.9); }
+  body.home .download pre {
+    background: none repeat scroll 0% 0% rgb(247, 247, 247);
+    font-family: "Courier 10 Pitch",Courier,monospace;
+    display: inline;
+    padding: 10px; }
+body.home .contact {
+  background: rgba(255, 255, 255, 0.75); }

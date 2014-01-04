@@ -15,18 +15,18 @@
   <script src="js/vendor/jquery-1.9.1.min.js"></script>
   <script src="js/vendor/popcorn-complete.min.js"></script>
   <script src="js/plugins.js"></script>
-  <script src="js/main-min.js"></script>
+  <script src="js/main.js"></script>
 </head>
-<body class="home">
+<body id="home" class="home">
 
   <nav class="clearfix">
     <ul class="clearfix">
-      <li><a href="">Home</a></li>
-      <li><a href="code">Code</a></li>
-      <li><a href="community">Community</a></li>
-      <li><a href="docs">Docs</a></li>
-      <li><a href="examples">Examples</a></li>
-      <li><a href="download">Download</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="#docs">Docs</a></li>
+      <li><a href="#download">Download</a></li>
     </ul>
   </nav>
 
@@ -43,7 +43,7 @@
       <img src="img/logo.png">
     </div>
 
-    <section class="intro">
+    <section id="about" class="intro">
       <div class="content">
         <div>
           <h2>Popcorn.js Is the Future</h2>
@@ -56,7 +56,7 @@
       </div>
     </section>
 
-    <section class="popcorn_users">
+    <section id="community" class="popcorn_users">
       <div class="content">
         <h2>Popcorn Lovers Everywhere!</h2>
         <div>
@@ -80,7 +80,7 @@
       </div>
     </section>
 
-    <section class="examples">
+    <section id="examples" class="examples">
       <div class="content">
         <h2>Examples</h2>
 
@@ -95,6 +95,49 @@
         <img src="img/example-placeholder.png">
         <img src="img/example-placeholder.png">
         <img src="img/example-placeholder.png">
+      </div>
+    </section>
+
+    <section id="docs" class="docs">
+      <div class="content">
+        <h2>Docs</h2>
+        <p>We are documenting the Popcorn.js API in detail.  <a href="http://popcornjs.org/popcorn-docs">Visit our API page</a>!</p>
+        <h4>Guides</h4>
+        <br>
+        <ul>
+        <li><a href="http://popcornjs.org/popcorn-101">Popcorn 101</a></li>
+        <li><a href="http://popcornjs.org/popcorn-with-youtube">Using Popcorn with Youtube</a></li>
+        <li><a href="http://popcornjs.org/popcorn-with-vimeo">Using Popcorn with Vimeo</a></li>
+        <li><a href="http://popcornjs.org/googlemaps">The Google Maps plugin</a></li>
+        </ul>
+        <h4>Contact</h4>
+          <p>We use <a href="https://bugzilla.mozilla.org/enter_bug.cgi?product=Webmaker&component=popcorn.js">Bugzilla</a> for bug tracking. Feel free to file a bug, or even better, fix one!</p>
+          <p>We have an active developer community on IRC at <a href="irc://irc.mozilla.org/webmaker">irc.mozilla.org/webmaker</a>. Come say hello!</p>
+          <p>We also have a <a href=" https://mail.mozilla.org/listinfo/community-popcorn">mailing list</a>, which currently hosts all discussion around the Popcorn project.</p>
+      </div>
+    </section>
+
+    <section id="download" class="download">
+      <div class="content">
+        <h2>Download</h2>
+        <p>Popcorn.js is made-up of a core JavaScript library, and many plugins.  You can download the core library by itself, get the core with plugins, or visit <a title="Mozilla Popcorn Build Tool" href="http://mozillapopcorn.org/build-tool">http://mozillapopcorn.org/build-tool</a> in order to create a customized Popcorn.js with select plugins.</p>
+
+        <h4>The stand-alone Popcorn.js core library (i.e., no plugins):</h4>
+        <p>Full Debug Version: <a href="http://cdn.popcornjs.org/code/dist/popcorn.js" target="_blank">popcorn.js</a></p>
+        <p>Minified Release Version: <a href="http://cdn.popcornjs.org/code/dist/popcorn.min.js" target="_blank">popcorn.min.js</a></p>
+
+        <h4>The Popcorn.js core library, plus all official plugins in one complete file:</h4>
+        <p>Full Debug Version: <a href="http://cdn.popcornjs.org/code/dist/popcorn-complete.js" target="_blank">popcorn-complete.js</a></p>
+        <p>Minified Release Version: <a href="http://cdn.popcornjs.org/code/dist/popcorn-complete.min.js" target="_blank">popcorn-complete.min.js</a></p>
+
+        <h4>Beta: The Popcorn.js core library, plus IE8 shim, flash player support, and the YouTube player:</h4>
+        <p>Full Debug Version: <a href="http://cdn.popcornjs.org/code/dist/popcorn-ie8.js" target="_blank">popcorn-ie8.js</a></p>
+        <p>Minified Release Version: <a href="http://cdn.popcornjs.org/code/dist/popcorn-ie8.min.js" target="_blank">popcorn-ie8.min.js</a></p>
+
+        <p>You can download the entire project in either <a href="https://github.com/mozilla/popcorn-js/zipball/master">zip</a> or <a href="https://github.com/mozilla/popcorn-js/tarball/master">tar</a> formats from Git.</p>
+        <p>You can find the project on Github <a href="https://github.com/mozilla/popcorn-js">here</a>, or clone it with <a href="http://git-scm.com">Git</a> by running:</p>
+        <pre>$ git clone git://github.com/mozilla/popcorn-js</pre>
+
       </div>
     </section>
 
