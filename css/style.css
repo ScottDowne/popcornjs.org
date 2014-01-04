@@ -102,13 +102,13 @@ nav {
   background: white;
   border: 1px solid #bfbfbf;
   font-family: "AvantGardeGothicITCW01X";
-  margin-left: -350px;
+  margin-left: -300px;
   opacity: 0;
   text-align: center;
   position: fixed;
   left: 50%;
   top: 25px;
-  width: 700px;
+  width: 600px;
   z-index: 10;
   -webkit-transition: all 1s ease-in-out;
   -moz-transition: all 1s ease-in-out;
