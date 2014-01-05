@@ -1,34 +1,101 @@
 jQuery(function($) {
 
+  var fullscreenElement = null,
+      fullscreenTarget = "",
+      scrollOffset;
+
   function set_section_heights() {
     $('.logo').height($(window).height());
   }
 
+  function onResize() {
+    $( fullscreenTarget ).height($(window).height());
+  }
+
+  function focus() {
+    if ($(window).scrollTop() === scrollOffset) {
+      $(window).off('scroll', focus);
+      $(window).on('scroll', blur);
+      // pull gross hom checks out of here.
+      if ( fullscreenTarget !== "#home" ) {
+        $(window).on('resize orientationChanged', onResize );
+      }
+    }
+  }
+
+  function blur() {
+    if ($(window).scrollTop() !== scrollOffset) {
+      // animate this...
+      fullscreenElement.css({height: 'auto'});
+      $(window).off('scroll', blur);
+      $(window).off('resize orientationChanged', onResize );
+      fullscreenTarget = "";
+      fullscreenElement = null;
+    }
+  }
+
   $('a[href^=#]').on('click', function(e) {
-    var t= $(this.hash);
-    $('.logo').height(500);
-    t=t.length&&t||$('[name='+this.hash.slice(1)+']');
-    if(t.length){
-      var tOffset=t.offset().top;
-      $('html,body').animate({scrollTop:tOffset},'slow');
-      e.preventDefault();
+    e.preventDefault();
+    if ( fullscreenElement ) {
+      if ( fullscreenTarget === this.hash ) {
+        return;
+      }
+      fullscreenElement.css({height: 'auto'});
+      $(window).off('scroll', focus);
+      $(window).off('scroll', blur);
+      fullscreenTarget = "";
+      fullscreenElement = null;
+    }
+
+    fullscreenTarget = this.hash;
+    fullscreenElement = $(fullscreenTarget);
+    // somehting wrong with home?
+
+    //if ( fullscreenTarget !== "#home" ) {
+      $('.logo').height(500);
+    //}
+    fullscreenElement = fullscreenElement.length && fullscreenElement ||
+$('[name='+fullscreenTarget.slice(1)+']');
+    if(fullscreenElement.length){
+      scrollOffset = fullscreenElement.offset().top;
+      if ( fullscreenTarget !== "#home" ) {
+        fullscreenElement.animate({height:$(window).height()},'fast');
+      }
+      if ( $(window).scrollTop() !== scrollOffset ) {
+        $('html,body').animate({scrollTop:scrollOffset},'slow');
+        $(window).on('scroll', focus);
+      } else {
+        focus();
+      }
     }
   });
 
-  // Size the intro logo splash to the viewport height on load.
-  set_section_heights();
+  // make scroll to top or bottom fill page
+  if ($(window).scrollTop() === 0) {
+    set_section_heights();
+    $(window).on('scroll', scrolltop);
+    $(window).on('resize orientationChanged', set_section_heights);
+  } else {
+    $('.logo').height(500);
+  }
 
-  $(window).on('scroll', function() {
+  function onscroll() {
     if ($(window).scrollTop() === 0) {
       $('.logo').animate({height:$(window).height()}, 'fast');
-      $(window).on('resize orientationChanged', set_section_heights);
-    } else if ($('.logo').height() !== 500) {
-      $(window).off('resize orientationChanged', set_section_heights);
-      $('.logo').animate({height:500}, 'fast');
+      //$('.logo').height($(window).height());
+      //$(window).on('scroll', scrolltop);
+      //$(window).on('resize orientationChanged', set_section_heights);
     }
-  });
-  // Resize the welcome panel on viewport resize.
-  $(window).on('resize orientationChanged', set_section_heights);
+  }
+
+  function scrolltop() {
+    $(window).off('resize orientationChanged', set_section_heights);
+    $(window).off('scroll', scrolltop);
+    $('.logo').animate({height:500}, 'fast');
+    //$('.logo').height(500);
+    // put this into the animate callback?
+    //$(window).on('scroll', onscroll);
+  }
 
   // Once the page has finished loading, animate the appearance of the logo and navigation.
   $(window).load(function () {
