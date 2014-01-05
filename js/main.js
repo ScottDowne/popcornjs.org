@@ -2,6 +2,7 @@ jQuery(function($) {
 
   var fullscreenElement = null,
       fullscreenTarget = "",
+      cancel = false,
       scrollOffset;
 
   function set_section_heights() {
@@ -35,6 +36,7 @@ jQuery(function($) {
   }
 
   $('a[href^=#]').on('click', function(e) {
+    cancel = true;
     e.preventDefault();
     if ( fullscreenElement ) {
       if ( fullscreenTarget === this.hash ) {
@@ -76,6 +78,7 @@ $('[name='+fullscreenTarget.slice(1)+']');
     $(window).on('scroll', scrolltop);
     $(window).on('resize orientationChanged', set_section_heights);
   } else {
+    cancel = true;
     $('.logo').height(500);
   }
 
@@ -136,13 +139,34 @@ $('[name='+fullscreenTarget.slice(1)+']');
       3 : { 'time' : '00:12', 'target' : '.examples' }
     };
 
+    function cancelCues() {
+      cancel = true;
+    }
+    var cueTraget;
+    function scrollDone() {
+      if ( cueTarget === $(window).scrollTop() ) {
+        $(window).off('scroll', scrollDone);
+        $(window).on('scroll', cancelCues);
+      }
+    }
+
+    $(window).on('scroll', cancelCues);
+
     $.each(cues, function(cue, parameters) {
       video.code({
         start:   parameters.time,
         onStart: function() {
-          $.scrollTo(parameters.target, 1000, {
-            offset: -95
-          });
+          // just being lazy, as I don't know if I plan on keeping this functionality or not.
+          if ( cancel ) {
+            return;
+          }
+          if ( parameters.time === "00:04" ) {
+            $('.logo').height(500);
+          }
+          $(window).on('scroll', scrollDone);
+          $(window).off('scroll', cancelCues);
+          var target = $( parameters.target ).offset().top;
+          $('html,body').animate({scrollTop:target},'slow');
         }
       });
     });
